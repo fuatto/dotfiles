@@ -31,7 +31,7 @@ env:
 
   # Window padding (changes require restart)
   #
-  # Blank space added around the window in pixels. This padding is scaled
+  # Blank space added around the window in pixes. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   #padding:
   #  x: 0
@@ -109,7 +109,10 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: "Fira Code"
+    # family: "MesloLGS NF"
+    # family: "Fira Code"
+    family: "FiraCode Nerd Font"
+    # family: "Fira Mono for Powerline"
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -120,7 +123,10 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "Fira Code"
+    # family: "MesloLGS NF"
+    # family: "Fira Code"
+    family: "FiraCode Nerd Font"
+    # family: "Fira Mono for Powerline"
 
     # The `style` can be specified to pick a specific face.
     #style: Bold
@@ -131,7 +137,10 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "Fira Code"
+    # family: "MesloLGS NF"
+    # family: "Fira Code"
+    family: "FiraCode Nerd Font"
+    # family: "Fira Mono for Powerline"
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -142,13 +151,16 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "Fira Code"
+    # family: "MesloLGS NF"
+    # family: "Fira Code"
+    family: "FiraCode Nerd Font"
+    # family: "Fira Mono for Powerline"
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
 
   # Point size
-  size: 11.0
+  size: 13.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -228,6 +240,62 @@ colors:
    cyan:    '0x56b6c2'
    white:   '0xffffff'
 
+# # Colors (One Half Dark)
+# colors:
+#   primary:
+#     background: '0x282c34'
+#     foreground: '0xabb2bf'
+#
+#   normal:
+#     black: '0x131613'
+#     red: '0xe06c75'
+#     green: '0x98c379'
+#     yellow: '0xe5c07b'
+#     blue: '0x61afef'
+#     magenta: '0xc678dd'
+#     cyan: '0x56b6c2'
+#     white: '0xdcdfe4'
+#
+#   bright:
+#     black: '0x282c34'
+#     red: '0xe06c75'
+#     green: '0x98c379'
+#     yellow: '0xe5c07b'
+#     blue: '0x61afef'
+#     magenta: '0xc678dd'
+#     cyan: '0x56b6c2'
+#     white: '0xdcdfe4'
+
+# # Colors (tokyo-night)
+# color:
+#   tokyo-night-storm: &tokyo-night-storm
+#     # Default colors
+#     primary:
+#       background: '0x24283b'
+#       foreground: '0xa9b1d6'
+#
+#     # Normal colors
+#     normal:
+#       black:   '0x32344a'
+#       red:     '0xf7768e'
+#       green:   '0x9ece6a'
+#       yellow:  '0xe0af68'
+#       blue:    '0x7aa2f7'
+#       magenta: '0xad8ee6'
+#       cyan:    '0x449dab'
+#       white:   '0x9699a8'
+#
+#     # Bright colors
+#     bright:
+#       black:   '0x444b6a'
+#       red:     '0xff7a93'
+#       green:   '0xb9f27c'
+#       yellow:  '0xff9e64'
+#       blue:    '0x7da6ff'
+#       magenta: '0xbb9af7'
+#       cyan:    '0x0db9d7'
+#       white:   '0xacb0d0'
+
 # # Colors (Gruvbox dark)
 # colors:
 #   # Default colors
@@ -261,17 +329,17 @@ colors:
 
 # # Colors (Oceanic Next)
 # colors:
-#   # Default colors
+#   Default colors
 #   primary:
 #     background: '0x1b2b34'
 #     foreground: '0xd8dee9'
-# 
-#   # Colors the cursor will use if `custom_cursor_colors` is true
+#
+#   Colors the cursor will use if `custom_cursor_colors` is true
 #   cursor:
 #     text: '0x1b2b34'
 #     cursor: '0xffffff'
-# 
-#   # Normal colors
+#
+# #   Normal colors
 #   normal:
 #     black:   '0x343d46'
 #     red:     '0xEC5f67'
@@ -281,8 +349,8 @@ colors:
 #     magenta: '0xc594c5'
 #     cyan:    '0x5fb3b3'
 #     white:   '0xd8dee9'
-# 
-#   # Bright colors
+#
+# #   Bright colors
 #   bright:
 #     black:   '0x343d46'
 #     red:     '0xEC5f67'
@@ -328,7 +396,7 @@ colors:
 #   primary:
 #     background: '0x1e282d'
 #     foreground: '0xc4c7d1'
-# 
+#
 #   # Normal colors
 #   normal:
 #     black:   '0x666666'
@@ -339,7 +407,7 @@ colors:
 #     magenta: '0xff2f90'
 #     cyan:    '0xaeddff'
 #     white:   '0xffffff'
-# 
+#
 #   # Bright colors
 #   bright:
 #     black:   '0xff262b'
@@ -509,8 +577,8 @@ colors:
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
-#shell:
-#  program: /bin/bash
+shell:
+ program: /bin/zsh
 #  args:
 #    - --login
 
