@@ -8,89 +8,72 @@ syntax on
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'powerline/powerline'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'fatih/vim-go'
+Plug 'dwarvesf/vim-sudofm'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
-Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
 Plug 'git://git.wincent.com/command-t.git'
-Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'jiangmiao/auto-pairs'
-Plug 'liuchengxu/space-vim-theme'
-Plug 'liuchengxu/space-vim-dark'
-Plug 'morhetz/gruvbox'
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'dogfooter/FIP.vim'
+" Plug 'dogfooter/FIP.vim'
 Plug 'buoto/gotests-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'mattn/emmet-vim'
-Plug 'tpope/vim-commentary'
-"Plug 'wincent/ferret'
 Plug 'othree/yajs.vim'
 Plug 'mxw/vim-jsx'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'kburdett/vim-nuuid'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-" Use release branch
+" Use rlease branch
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'wakatime/vim-wakatime'
 Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'chrisbra/NrrwRgn'
 " Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
 Plug 'hail2u/vim-css3-syntax'
 " https://github.com/tpope/vim-markdown
-Plug 'mattn/emmet-vim'
-" https://github.com/mattn/emmet-vim
-" Plug 'Yggdroot/indentLine'
-Plug 'roman/golden-ratio'
+" Plug 'roman/golden-ratio'
+Plug 'chemzqm/vim-jsx-improve'
+Plug 'flrnprz/candid.vim'
+Plug 'flrnprz/plastic.vim'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'jparise/vim-graphql'
+Plug 'junegunn/goyo.vim'
+Plug 'elixir-editors/vim-elixir'
+" lualine
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+" treesitter
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'matsuuu/pinkmare'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+
 
 call plug#end()
 
-" Some common settings
-set mouse=a
-set number
-set showcmd
-set splitright
-set splitbelow
-set nowrap        						" don't wrap lines
-set tabstop=4     						" a tab is four spaces
-set backspace=indent,eol,start 			" allow backspacing over everything in insert mode
-set autoindent    						" always set autoindenting on
-set copyindent    						" copy the previous indentation on autoindenting
-set number        						" always show line numbers
-set shiftwidth=4  						" number of spaces to use for autoindenting
-set shiftround    						" use multiple of shiftwidth when indenting with '<' and '>'
-set showmatch     						" set show matching parenthesis
-set ignorecase    						" ignore case when searching
-set smartcase     						" ignore case if search pattern is all lowercase,
-                  						" 	case-sensitive otherwise
-set smarttab      						" insert tabs on the start of a line according to
-                  						" 	shiftwidth, not tabstop
-" set hlsearch      						" highlight search terms
-set incsearch     						" show search matches as you type
-set title                				" change the terminal's title
-"set visualbell           				" don't beep
-"set noerrorbells         				" don't beep
-set nobackup
-set noswapfile
-set tw=80
-set foldmethod=indent 					"config code folding by indent by default
-set termguicolors
+" lua <<EOF
+" -- treesitter config this is laggy af
+" require'nvim-treesitter.configs'.setup {
+"     ensure_installed = "maintained", -- one of "all", "maintained"
+"     highlight = {
+"         enable = true,
+"     },
+" }
+" EOF
 
 " Keep all folds open when a file is opened
 augroup OpenAllFoldsOnFileOpen
@@ -98,28 +81,44 @@ augroup OpenAllFoldsOnFileOpen
     autocmd BufRead * normal zR
 augroup END
 
-colorscheme OceanicNext
 
-" General colors for vim
-" if has('gui_running') || has('vim')
-"     hi Normal 		guifg=#f6f3e8 guibg=#242424
-" else
-"     " Set the terminal default background and foreground colors, thereby
-"     " improving performance by not needing to set these colors on empty cells.
-"     "hi Normal guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
-"     let &t_ti = &t_ti . "\033]10;#f6f3e8\007\033]11;#282828\007"
-"     let &t_te = &t_te . "\033]110\007\033]111\007"
-" endif
+" " To include syntax highlighting definitions for several filetypes
+" " Note: setting this to 1 may leave 'a wake of destruction when switching away' (Tim Pope), that is, when you switch to a different colorscheme the highlighting may look wrong or disabled.
+" let g:gruvbox_filetype_hi_groups = 1
+"
+" " Set to 1 if you want to enable italics in the terminal. Note that the terminal must support italics.defalut 0
+" let g:gruvbox_italic = 1
+"
+" " Set to 1 if you want strings in italics.default 0
+" let g:gruvbox_italicize_strings = 1
+"
+" " Set to 1 to include syntax highlighting definitions for a number of popular plugins defalut 0:
+" " Note: as above
+" let g:gruvbox_plugin_hi_groups = 1
+"
+" " Set to 1 if you want a transparent background. Takes effect only in the terminal defalut 0.
+" let g:gruvbox_transp_bg = 1
 
+" Enable syntax highlighting
+syntax on
+set termguicolors
+" colorscheme pinkmare
+colorscheme onehalfdark
+" let g:tokyonight_style = "storm"
+" colorscheme tokyonight
+" colorscheme plastic
+
+" clear line number column color
+highlight clear LineNr
 
 
 " Leader
 let mapleader = ","
 
 " map keys for git
-nnoremap <silent>gb :Gblame<CR>
+nnoremap <silent>gb :Git blame<CR>
 
-" map keys for fzf
+" map keys
 nnoremap ; :
 nnoremap <space>bb :Buffers<CR>
 nnoremap <space>bn :bn<CR>
@@ -131,6 +130,7 @@ nnoremap <space>sp :Rg<CR>
 nnoremap <space>qq :q<CR>
 nnoremap <space>q! :q!<CR>
 nnoremap <space>qa! :qa!<CR>
+nnoremap <space>fs :w<CR>
 
 " map delete texts
 nnoremap <silent>da :%d<CR>
@@ -143,10 +143,10 @@ nnoremap <space>ar :Ranger<CR>
 
 " map for nerdtree
 nnoremap <silent><F8> :NERDTreeToggle<CR>
+nnoremap <space>pt :NERDTreeToggle<CR>
 
 " map common keys
-" save the current file
-nnoremap <space>fs :w<CR>
+nmap <space> fs <Plug>(coc-action-format)
 
 " get theme
 nmap <space>ts :Colors<CR>
@@ -188,15 +188,29 @@ map <leader>ff :Ranger<CR>
 " force coc to update
 let g:coc_node_path = '/usr/local/bin/node'
 " make sure coc uses compiled code
-let g:coc_force_debug = 1
+" let g:coc_force_debug = 1
 
 " indentLine config
 let g:indentLine_setColors = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " Golang settings
+" disable all linters as that is taken care of by coc.nvim
+let g:go_diagnostics_enabled = 0
+let g:go_metalinter_enabled = []
+
+" don't jump to errors after metalinter is invoked
+let g:go_jump_to_error = 0
+
+" auto highlight variable your cursor is on
+let g:go_auto_sameids = 0
+
+
+" auto import on save
 let g:go_fmt_command = "goimports"
+" show type info in status bar
 let g:go_auto_type_info = 1
+" highlight same variables in view
 let g:go_auto_sameids = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -288,14 +302,15 @@ augroup END
 " prettier config
 autocmd FileType javascript set formatprg=prettier\ --stdin
 " format on save
-autocmd BufWritePre *.js :normal gggqG
+" this one is getting bug for js file
+" autocmd BufWritePre *.js :normal gggqG
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 
 " ale settings
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'scss': ['prettier'],
-\ 	'go': ['gopls'],
 \}
 let g:ale_fixers = {
 \ 'javascript': ['eslint'],
@@ -307,11 +322,6 @@ let g:ale_fix_on_save = 1
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 highlight Normal ctermbg=NONE
-
-" Airline config: Enable integration with airline. 
-let g:airline#extensions#ale#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='base16_oceanicnext'
 
 " NERDCommenter settings
 " Add spaces after comment delimiters by default
@@ -331,12 +341,6 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " Enable NERDCommenterToggle to check all selected lines is commented or not 
 let g:NERDToggleCheckAllLines = 1
-
-" deoplete config
-if has('nvim')
-	" Enable deoplete on startup
-	let g:deoplete#enable_at_startup = 1
-endif
 
 " Disable deoplete when in multi cursor mode
 function! Multiple_cursors_before()
@@ -367,6 +371,24 @@ set cot+=preview
 
 " always show signcolumns
 set signcolumn=yes
+
+" Add full file path to your existing statusline
+set laststatus=2
+set statusline+=%F
+
+" coc.nvim uses jsonc as configuration file format, the same as VSCode.
+" To ge the syntax highlighting
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" shortcut to coc config
+function! SetupCommandAbbrs(from, to)
+  exec 'cnoreabbrev <expr> '.a:from
+        \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
+        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+endfunction
+
+" Use C to open coc config
+call SetupCommandAbbrs('C', 'CocConfig')
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -412,8 +434,10 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
 
@@ -449,6 +473,9 @@ command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Use `:Prettier` to format current buffer
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Custom settings
 " Using coc-snippets
