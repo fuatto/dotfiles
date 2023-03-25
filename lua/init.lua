@@ -91,8 +91,8 @@ require('packer').startup(function(use)
           enabled = true,
           auto_refresh = true,
           keymap = {
-            jump_prev = "[[",
-            jump_next = "]]",
+            jump_next = "C-j",
+            jump_prev = "C-k",
             accept = "<CR>",
             refresh = "gr",
             open = "<M-CR>"
@@ -110,8 +110,8 @@ require('packer').startup(function(use)
             accept = "<Tab>",
             accept_word = false,
             accept_line = false,
-            next = "<M-]>",
-            prev = "<M-[>",
+            next = "<C-j>",
+            prev = "<C-k>",
             dismiss = "<C-]>",
           },
         },
@@ -453,6 +453,29 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  -- configs to import on save issue with copilot_cmp
+  vim.api.nvim_create_autocmd('BufWritePre', {
+    pattern = {'*.go'},
+    callback = function()
+      -- goimports
+      local params = vim.lsp.util.make_range_params(nil, "utf-16")
+      params.context = { only = { "source.organizeImports" } }
+      local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
+      for _, res in pairs(result or {}) do
+        for _, r in pairs(res.result or {}) do
+          if r.edit then
+            vim.lsp.util.apply_workspace_edit(r.edit, "utf-16")
+          else
+            vim.lsp.buf.execute_command(r.command)
+          end
+        end
+      end
+
+      -- gofmt
+      vim.lsp.buf.format()
+    end,
+  })
 end
 
 -- Enable the following language servers
@@ -536,7 +559,7 @@ cmp.setup {
     },
   },
   sources = {
-    { name = 'copilot'},
+    { name = 'copilot' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
