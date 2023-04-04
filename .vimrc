@@ -13,7 +13,7 @@ Plug 'dwarvesf/vim-sudofm'
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
-Plug 'git://git.wincent.com/command-t.git'
+" Plug 'git://git.wincent.com/command-t.git'
 " Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
@@ -34,7 +34,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'kburdett/vim-nuuid'
-" Use rlease branch
+" Use release branch
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'wakatime/vim-wakatime'
@@ -193,6 +193,9 @@ let g:coc_node_path = '/usr/local/bin/node'
 " indentLine config
 let g:indentLine_setColors = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" commmandT issue?
+let g:CommandTPreferredImplementation='lua'
 
 " Golang settings
 " disable all linters as that is taken care of by coc.nvim
